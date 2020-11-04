@@ -60,7 +60,7 @@ public class AppTest
         Bernice rb = Bernice.of(sb.getPublicKey());
 
         Envelope d = sa.encrypt(rb, a);
-        Optional<A> data = sb.decrypt(ra, d, A.class);
+        Optional<A> data = sb.decryptClass(ra, d, A.class);
 
         assertTrue(data.isPresent());
         assertEquals(data.get().getA(), a.getA());
@@ -90,7 +90,7 @@ public class AppTest
         Bernice rb = Bernice.of(sa.getPublicKey());
 
         Envelope envelope = Ava.getMapper().readValue(data, Envelope.class);
-        Optional<String> rs = sb.decrypt(rb, envelope, String.class);
+        Optional<String> rs = sb.decryptClass(rb, envelope, String.class);
         assertTrue(rs.isPresent());
         assertEquals("x",rs.get());
 

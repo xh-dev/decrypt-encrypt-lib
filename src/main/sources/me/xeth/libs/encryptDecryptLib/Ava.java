@@ -1,6 +1,8 @@
 package me.xeth.libs.encryptDecryptLib;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.xethh.libs.toolkits.encryption.AesEncryption;
@@ -77,7 +79,45 @@ public class Ava {
     }
 
 
-    public <I> Optional<I> decrypt(Bernice receiver, Envelope envelope, Class<I> type) throws IOException {
+    public <I> Optional<I> decryptTypeReference(Bernice receiver, Envelope envelope, TypeReference type) throws IOException {
+        DataContainer dataContainer = mapper.readValue(Base64.getDecoder().decode(envelope.getData()), DataContainer.class);
+        IvParameterSpec iv = AesEncryption.iv(Base64.getDecoder().decode(RsaEncryption.decrypt(dataContainer.getIv(), this.privateKey)));
+        SecretKey key = AesEncryption.secretKey(Base64.getDecoder().decode(RsaEncryption.decrypt(dataContainer.getKey(), this.privateKey)));
+        String dataStr = AesEncryption.decrypt(dataContainer.getData(), key, iv);
+        boolean rs = RsaEncryption.verify(dataStr, dataContainer.getSign(), receiver.getPublicKey());
+        if(rs){
+            if(String.class.equals(type)){
+                return Optional.of((I)dataStr);
+            }
+            else{
+                I data = mapper.readValue(dataStr, type);
+                return Optional.of(data);
+            }
+        }
+        else{
+            return Optional.empty();
+        }
+    }
+    public <I> Optional<I> decryptJavaType(Bernice receiver, Envelope envelope, JavaType type) throws IOException {
+        DataContainer dataContainer = mapper.readValue(Base64.getDecoder().decode(envelope.getData()), DataContainer.class);
+        IvParameterSpec iv = AesEncryption.iv(Base64.getDecoder().decode(RsaEncryption.decrypt(dataContainer.getIv(), this.privateKey)));
+        SecretKey key = AesEncryption.secretKey(Base64.getDecoder().decode(RsaEncryption.decrypt(dataContainer.getKey(), this.privateKey)));
+        String dataStr = AesEncryption.decrypt(dataContainer.getData(), key, iv);
+        boolean rs = RsaEncryption.verify(dataStr, dataContainer.getSign(), receiver.getPublicKey());
+        if(rs){
+            if(String.class.equals(type)){
+                return Optional.of((I)dataStr);
+            }
+            else{
+                I data = mapper.readValue(dataStr, type);
+                return Optional.of(data);
+            }
+        }
+        else{
+            return Optional.empty();
+        }
+    }
+    public <I> Optional<I> decryptClass(Bernice receiver, Envelope envelope, Class<I> type) throws IOException {
         DataContainer dataContainer = mapper.readValue(Base64.getDecoder().decode(envelope.getData()), DataContainer.class);
         IvParameterSpec iv = AesEncryption.iv(Base64.getDecoder().decode(RsaEncryption.decrypt(dataContainer.getIv(), this.privateKey)));
         SecretKey key = AesEncryption.secretKey(Base64.getDecoder().decode(RsaEncryption.decrypt(dataContainer.getKey(), this.privateKey)));
