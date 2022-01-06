@@ -1,16 +1,15 @@
 package me.xeth.libs.encryptDecryptLib;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import me.xethh.libs.toolkits.encryption.RsaEncryption;
+import dev.xethh.libs.toolkits.commons.encryption.RsaEncryption;
 import me.xethh.utils.functionalPacks.Scope;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Optional;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test for simple App.

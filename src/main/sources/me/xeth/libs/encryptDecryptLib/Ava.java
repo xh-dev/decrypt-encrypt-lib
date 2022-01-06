@@ -3,10 +3,9 @@ package me.xeth.libs.encryptDecryptLib;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.xethh.libs.toolkits.encryption.AesEncryption;
-import me.xethh.libs.toolkits.encryption.RsaEncryption;
+import dev.xethh.libs.toolkits.commons.encryption.AesEncryption;
+import dev.xethh.libs.toolkits.commons.encryption.RsaEncryption;
 import me.xethh.utils.functionalPacks.Scope;
 
 import javax.crypto.SecretKey;
