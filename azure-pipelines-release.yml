@@ -3,7 +3,7 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-name: DateUtils release pipeline
+name: Decrypt Encrypt Lib release pipeline
 trigger:
   tag:
     - "v*"
