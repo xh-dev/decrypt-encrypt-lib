@@ -5,7 +5,7 @@
 
 name: Decrypt Encrypt Lib release pipeline
 trigger:
-  tag:
+  tags:
     - "v*"
 
 pool: xhn-build-pool
