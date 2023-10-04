@@ -1,0 +1,20 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+name: DateUtils release pipeline
+trigger:
+  tag:
+    - "v*"
+
+pool: xhn-build-pool
+
+steps:
+  - script: |
+      mvn clean
+      mvn package
+    displayName: 'build'
+  - script: |
+      mvn -X deploy
+    displayName: 'publish'
