@@ -78,7 +78,7 @@ public class Ava {
     }
 
 
-    public <I> Optional<I> decryptTypeReference(Bernice receiver, Envelope envelope, TypeReference type) throws IOException {
+    public <I> Optional<I> decryptTypeReference(Bernice receiver, Envelope envelope, TypeReference<I> type) throws IOException {
         DataContainer dataContainer = mapper.readValue(Base64.getDecoder().decode(envelope.getData()), DataContainer.class);
         IvParameterSpec iv = AesEncryption.iv(Base64.getDecoder().decode(RsaEncryption.decrypt(dataContainer.getIv(), this.privateKey)));
         SecretKey key = AesEncryption.secretKey(Base64.getDecoder().decode(RsaEncryption.decrypt(dataContainer.getKey(), this.privateKey)));
