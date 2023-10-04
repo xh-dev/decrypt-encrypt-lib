@@ -14,5 +14,5 @@ steps:
       mvn package
     displayName: 'build'
   - script: |
-      mvn -X deploy
+      mvn deploy
     displayName: 'publish'
