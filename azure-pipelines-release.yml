@@ -4,7 +4,10 @@
 # https://aka.ms/yaml
 
 name: Decrypt Encrypt Lib release pipeline
-trigger: none
+trigger:
+  tags:
+    include:
+      - 'v*'
 
 pool: xhn-build-pool
 
