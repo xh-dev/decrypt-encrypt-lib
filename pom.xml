@@ -12,7 +12,7 @@
 
     <groupId>me.xethh.internal.libs</groupId>
     <artifactId>encrypt-decrypt-lib</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <name>encryptDecryptLib</name>
 
@@ -109,6 +109,8 @@
     </dependencyManagement>
 
     <build>
+        <sourceDirectory>src/main/sources</sourceDirectory>
+        <testSourceDirectory>src/test/sources</testSourceDirectory>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
