@@ -1,18 +1,15 @@
 package me.xethh.libs.encryptDecryptLib;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.var;
+import lombok.val;
 
-import java.io.IOException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Optional;
 
 public interface DeEnCryptor {
     static DeEnCryptorImpl of(PublicKey publicKey, PrivateKey privateKey) {
-        var om = new ObjectMapper();
+        val om = new ObjectMapper();
         return DeEnCryptor.of(publicKey, privateKey, om);
     }
 
