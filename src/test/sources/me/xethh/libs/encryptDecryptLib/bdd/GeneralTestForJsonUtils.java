@@ -42,6 +42,7 @@ public class GeneralTestForJsonUtils {
         listOfO = JsonUtils.asJavaType(listOfOStr, new ObjectMapper(), jType);
     }
 
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

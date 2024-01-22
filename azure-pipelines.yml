@@ -11,8 +11,7 @@ pool: xhn-build-pool
 
 steps:
   - script: |
-      mvn clean
-      mvn package
+      mvn clean compile test package
     displayName: 'build'
 #- script: |
 #    mvn -X deploy
