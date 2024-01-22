@@ -22,22 +22,8 @@ public interface DeEnCryptor {
      */
     String encryptToJsonContainer(PublicKey receiver, String data);
 
-    /**
-     * Encrypt an input string into {@link me.xethh.libs.encryptDecryptLib.Envelope} object
-     * @param receiver public key of the receiver
-     * @param data data to be encrypted in string format
-     * @return {@link me.xethh.libs.encryptDecryptLib.Envelope}
-     */
     DataContainer encryptToContainer(PublicKey receiver, String data);
 
-    /**
-     * Encrypting an java object into json format and then return as {@link me.xethh.libs.encryptDecryptLib.Envelope} object
-     *
-     * @param receiver public key of the receiver
-     * @param in       input data object
-     * @param <O>      generic of the input data
-     * @return {@link me.xethh.libs.encryptDecryptLib.Envelope}
-     */
     <O> DataContainer encryptObjectToContainer(PublicKey receiver, O in);
 
     <O> String encryptObjectToJsonContainer(PublicKey receiver, O in);
