@@ -7,6 +7,7 @@ import java.security.PrivateKey;
 
 public interface Signer {
     SignedData sign(String data);
+    SignedData signMultiple(String... data);
     String signToJson(String data);
 
     static Signer instance(PrivateKey privateKey){

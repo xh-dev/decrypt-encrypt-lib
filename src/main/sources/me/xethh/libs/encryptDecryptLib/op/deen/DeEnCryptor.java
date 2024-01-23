@@ -9,12 +9,12 @@ import java.security.PublicKey;
 import java.util.Optional;
 
 public interface DeEnCryptor {
-    static DeEnCryptorImpl of(PublicKey publicKey, PrivateKey privateKey) {
+    static DeEnCryptorImpl instance(PublicKey publicKey, PrivateKey privateKey) {
         val om = new ObjectMapper();
-        return DeEnCryptor.of(publicKey, privateKey, om);
+        return DeEnCryptor.instance(publicKey, privateKey, om);
     }
 
-    static DeEnCryptorImpl of(PublicKey publicKey, PrivateKey privateKey, ObjectMapper om) {
+    static DeEnCryptorImpl instance(PublicKey publicKey, PrivateKey privateKey, ObjectMapper om) {
         return new DeEnCryptorImpl(publicKey, privateKey, om);
     }
 

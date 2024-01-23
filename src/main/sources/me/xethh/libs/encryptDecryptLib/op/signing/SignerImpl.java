@@ -26,6 +26,15 @@ public class SignerImpl implements Signer {
     }
 
     @Override
+    public SignedData signMultiple(String... data) {
+        val sb = new StringBuilder();
+        for(String d : data){
+            sb.append(d);
+        }
+        return sign(sb.toString());
+    }
+
+    @Override
     @SneakyThrows
     public String signToJson(String data) {
         return objectMapper.writeValueAsString(sign(data));
