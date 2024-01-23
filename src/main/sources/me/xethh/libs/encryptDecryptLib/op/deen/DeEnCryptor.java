@@ -1,7 +1,9 @@
-package me.xethh.libs.encryptDecryptLib;
+package me.xethh.libs.encryptDecryptLib.op.deen;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.val;
+import me.xethh.libs.encryptDecryptLib.op.deen.impl.DeEnCryptorImpl;
+import me.xethh.libs.encryptDecryptLib.dataModel.DataContainer;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -18,7 +20,7 @@ public interface DeEnCryptor {
     }
 
     /**
-     * Wrapping the method {@link me.xethh.libs.encryptDecryptLib.DeEnCryptor#encryptToContainer(PublicKey, String)} by serializing the output into json string
+     * Wrapping the method {@link DeEnCryptor#encryptToContainer(PublicKey, String)} by serializing the output into json string
      */
     String encryptToJsonContainer(PublicKey receiver, String data);
 

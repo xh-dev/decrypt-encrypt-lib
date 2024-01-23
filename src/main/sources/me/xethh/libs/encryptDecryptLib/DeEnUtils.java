@@ -2,6 +2,7 @@ package me.xethh.libs.encryptDecryptLib;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.xethh.libs.encryptDecryptLib.dataModel.DataContainer;
 import me.xethh.libs.encryptDecryptLib.exceptions.SerializationException;
 
 public class DeEnUtils {

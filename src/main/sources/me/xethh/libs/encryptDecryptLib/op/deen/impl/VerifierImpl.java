@@ -1,12 +1,12 @@
-package me.xethh.libs.encryptDecryptLib;
+package me.xethh.libs.encryptDecryptLib.op.deen.impl;
 
 import dev.xethh.libs.toolkits.commons.encryption.RsaEncryption;
-import lombok.val;
+import me.xethh.libs.encryptDecryptLib.dataModel.SignedData;
+import me.xethh.libs.encryptDecryptLib.op.deen.Verifier;
 
-import java.security.PrivateKey;
 import java.security.PublicKey;
 
-public class VerifierImpl implements Verifier{
+public class VerifierImpl implements Verifier {
     private final PublicKey publicKey;
     public VerifierImpl(PublicKey publicKey) {
         this.publicKey = publicKey;

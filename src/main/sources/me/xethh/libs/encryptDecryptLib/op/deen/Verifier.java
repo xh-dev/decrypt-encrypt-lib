@@ -1,4 +1,7 @@
-package me.xethh.libs.encryptDecryptLib;
+package me.xethh.libs.encryptDecryptLib.op.deen;
+
+import me.xethh.libs.encryptDecryptLib.op.deen.impl.VerifierImpl;
+import me.xethh.libs.encryptDecryptLib.dataModel.SignedData;
 
 import java.security.PublicKey;
 

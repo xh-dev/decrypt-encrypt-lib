@@ -1,13 +1,15 @@
-package me.xethh.libs.encryptDecryptLib;
+package me.xethh.libs.encryptDecryptLib.op.deen.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.xethh.libs.toolkits.commons.encryption.RsaEncryption;
 import lombok.SneakyThrows;
 import lombok.val;
+import me.xethh.libs.encryptDecryptLib.dataModel.SignedData;
+import me.xethh.libs.encryptDecryptLib.op.deen.Signer;
 
 import java.security.PrivateKey;
 
-public class SignerImpl implements Signer{
+public class SignerImpl implements Signer {
     private final PrivateKey privateKey;
     private final ObjectMapper objectMapper;
     public SignerImpl(PrivateKey privateKey, ObjectMapper objectMapper) {

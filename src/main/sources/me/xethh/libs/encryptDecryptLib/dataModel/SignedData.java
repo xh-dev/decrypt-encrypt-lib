@@ -1,4 +1,4 @@
-package me.xethh.libs.encryptDecryptLib;
+package me.xethh.libs.encryptDecryptLib.dataModel;
 
 import lombok.*;
 

@@ -1,16 +1,17 @@
-package me.xethh.libs.encryptDecryptLib;
+package me.xethh.libs.encryptDecryptLib.op.deen.impl;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.xethh.libs.toolkits.commons.encryption.AesEncryption;
 import dev.xethh.libs.toolkits.commons.encryption.RsaEncryption;
 import lombok.val;
+import me.xethh.libs.encryptDecryptLib.DeEnUtils;
+import me.xethh.libs.encryptDecryptLib.dataModel.DataContainer;
 import me.xethh.libs.encryptDecryptLib.exceptions.NotDataContainerException;
 import me.xethh.libs.encryptDecryptLib.exceptions.SerializationException;
 import me.xethh.libs.encryptDecryptLib.exceptions.SignatureNotValidException;
+import me.xethh.libs.encryptDecryptLib.op.deen.DeEnCryptor;
 import me.xethh.utils.functionalPacks.Scope;
 
 import javax.crypto.SecretKey;
@@ -21,7 +22,7 @@ import java.security.PublicKey;
 import java.util.Base64;
 import java.util.Optional;
 
-public class DeEnCryptorImpl implements DeEnCryptor{
+public class DeEnCryptorImpl implements DeEnCryptor {
     private final ObjectMapper mapper;
     private final PublicKey publicKey;
     private final PrivateKey privateKey;

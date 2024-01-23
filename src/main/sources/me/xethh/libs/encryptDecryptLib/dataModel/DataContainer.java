@@ -1,4 +1,4 @@
-package me.xethh.libs.encryptDecryptLib;
+package me.xethh.libs.encryptDecryptLib.dataModel;
 
 public class DataContainer {
     private String sign;
