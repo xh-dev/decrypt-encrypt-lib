@@ -1,8 +1,7 @@
-package me.xethh.libs.encryptDecryptLib.op.deen.impl;
+package me.xethh.libs.encryptDecryptLib.op.signing;
 
 import dev.xethh.libs.toolkits.commons.encryption.RsaEncryption;
 import me.xethh.libs.encryptDecryptLib.dataModel.SignedData;
-import me.xethh.libs.encryptDecryptLib.op.deen.Verifier;
 
 import java.security.PublicKey;
 

@@ -1,4 +1,4 @@
-package me.xethh.libs.encryptDecryptLib.op.deen.impl;
+package me.xethh.libs.encryptDecryptLib.op.deen;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;

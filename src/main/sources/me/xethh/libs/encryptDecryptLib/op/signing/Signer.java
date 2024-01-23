@@ -1,7 +1,6 @@
-package me.xethh.libs.encryptDecryptLib.op.deen;
+package me.xethh.libs.encryptDecryptLib.op.signing;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.xethh.libs.encryptDecryptLib.op.deen.impl.SignerImpl;
 import me.xethh.libs.encryptDecryptLib.dataModel.SignedData;
 
 import java.security.PrivateKey;

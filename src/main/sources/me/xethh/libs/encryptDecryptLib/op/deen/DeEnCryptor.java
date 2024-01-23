@@ -2,7 +2,6 @@ package me.xethh.libs.encryptDecryptLib.op.deen;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.val;
-import me.xethh.libs.encryptDecryptLib.op.deen.impl.DeEnCryptorImpl;
 import me.xethh.libs.encryptDecryptLib.dataModel.DataContainer;
 
 import java.security.PrivateKey;

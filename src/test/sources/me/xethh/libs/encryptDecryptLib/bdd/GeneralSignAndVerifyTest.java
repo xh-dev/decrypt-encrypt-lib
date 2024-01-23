@@ -10,8 +10,8 @@ import io.cucumber.java.en.When;
 import lombok.SneakyThrows;
 import lombok.val;
 import me.xethh.libs.encryptDecryptLib.dataModel.SignedData;
-import me.xethh.libs.encryptDecryptLib.op.deen.Signer;
-import me.xethh.libs.encryptDecryptLib.op.deen.Verifier;
+import me.xethh.libs.encryptDecryptLib.op.signing.Signer;
+import me.xethh.libs.encryptDecryptLib.op.signing.Verifier;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
