@@ -3,6 +3,7 @@ package me.xethh.libs.encryptDecryptLib.trust;
 import lombok.Getter;
 
 import java.security.PublicKey;
+import java.util.List;
 
 public class NameCardImpl implements NameCard{
     @Getter
@@ -14,11 +15,19 @@ public class NameCardImpl implements NameCard{
     @Getter
     private final String signature;
 
-    public NameCardImpl(String name, String uid, PublicKey publicKey, String signature) {
+    @Getter
+    private final List<String> trustedBy;
+
+    @Getter
+    private final String issuedBy;
+
+    public NameCardImpl(String name, String uid, PublicKey publicKey, String signature, String issuedBy, List<String> trustedBy) {
         this.name = name;
         this.uid = uid;
         this.publicKey = publicKey;
         this.signature = signature;
+        this.trustedBy = trustedBy;
+        this.issuedBy = issuedBy;
     }
 
     @Override
@@ -39,5 +48,10 @@ public class NameCardImpl implements NameCard{
     @Override
     public String signature() {
         return getSignature();
+    }
+
+    @Override
+    public List<String> trustBy() {
+        return getTrustedBy();
     }
 }

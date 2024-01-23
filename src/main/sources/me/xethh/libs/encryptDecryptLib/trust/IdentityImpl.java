@@ -11,7 +11,13 @@ import me.xethh.libs.encryptDecryptLib.op.signing.Verifier;
 
 import java.nio.charset.StandardCharsets;
 import java.security.*;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class IdentityImpl implements Identity{
     @Getter
@@ -127,7 +133,13 @@ public class IdentityImpl implements Identity{
 
     @Override
     @SneakyThrows
-    public NameCard mySelf() {
+    public NameCard mySelf(List<Identity> identityList) {
+        return mySelf(identityList, true);
+    }
+
+    @Override
+    public NameCard mySelf(List<Identity> trustedIdentity, Boolean withSelf) {
+        val trusted = trustedIdentity.stream().filter(this::isTrusted).map(Identity::uid);
         return NameCard.instance(
                 name,
                 uid,
@@ -136,7 +148,16 @@ public class IdentityImpl implements Identity{
                         .signMultiple(
                                 name, uid,
                                 Base64.getEncoder().encodeToString(publicKey.getEncoded())
-                        ).getSignature()
+                        ).getSignature(),
+                uid(),
+                withSelf?
+                        Stream.concat(Stream.of(uid()), trusted).collect(Collectors.toList())
+                        :trusted.collect(Collectors.toList())
         );
+    }
+
+    @Override
+    public boolean isTrusted(Identity identity) {
+        return true;
     }
 }

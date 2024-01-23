@@ -7,6 +7,7 @@ import me.xethh.libs.encryptDecryptLib.op.signing.Verifier;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.List;
 
 public interface Identity {
     String uid();
@@ -23,7 +24,8 @@ public interface Identity {
 
     DeEnCryptor deenCryptor();
 
-    NameCard mySelf();
+    NameCard mySelf(List<Identity> trustedIdentity);
+    NameCard mySelf(List<Identity> trustedIdentity, Boolean withSelf);
 
 
     static Identity instance(String name) {
@@ -41,4 +43,6 @@ public interface Identity {
     static Identity instance(PublicKey publicKey, PrivateKey privateKey, String uid, String name, String salt, String fingerPrint, ObjectMapper mapper) {
         return new IdentityImpl(publicKey, privateKey, uid, name, salt, fingerPrint, mapper);
     }
+
+    boolean isTrusted(Identity identity);
 }
