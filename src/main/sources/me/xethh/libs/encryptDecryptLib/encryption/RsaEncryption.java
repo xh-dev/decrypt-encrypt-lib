@@ -1,5 +1,7 @@
 package me.xethh.libs.encryptDecryptLib.encryption;
 
+import lombok.SneakyThrows;
+import lombok.val;
 import sun.security.util.DerInputStream;
 import sun.security.util.DerValue;
 
@@ -7,11 +9,19 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.file.Files;
 import java.security.*;
-import java.security.spec.*;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPrivateCrtKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -152,6 +162,16 @@ public class RsaEncryption {
             e.printStackTrace();
             throw new RuntimeException("IllegalBlockSizeException", e);
         }
+    }
+
+    @SneakyThrows
+    public static PrivateKey getPrivateKeyFromPem(String name) {
+        return getPrivateKey(RSAFormatting.loadPemBytes(name));
+    }
+
+    @SneakyThrows
+    public static PublicKey getPubKeyFromPem(String name) {
+        return getPublicKey(RSAFormatting.loadPemBytes(name));
     }
 
     /**
