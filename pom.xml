@@ -17,7 +17,7 @@
     <name>encryptDecryptLib</name>
 
     <url>http://www.example.com</url>
-    <description>Library of common used tools</description>
+    <description>Library of encryption and decryption</description>
 
     <licenses>
         <license>
@@ -48,26 +48,6 @@
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
-    <!--Add project information here start-->
-    <url></url>
-    <description></description>
-    <developers>
-        <developer>
-            <name>Xeth Hung</name>
-            <email>admin@xethh.me</email>
-            <organizationUrl>http://blog.xethh.me</organizationUrl>
-        </developer>
-    </developers>
-    <!--Add project information here end-->
-
-    <!--Add SCM and distribution managemetn start-->
-    <scm>
-        <connection></connection>
-        <developerConnection></developerConnection>
-        <url></url>
-    </scm>
-    <!--Add SCM and distribution managemetn end-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
