@@ -2,7 +2,6 @@ package me.xethh.libs.encryptDecryptLib.bdd;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.xethh.libs.toolkits.commons.encryption.RsaEncryption;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,6 +9,7 @@ import io.cucumber.java.en.When;
 import lombok.SneakyThrows;
 import lombok.val;
 import me.xethh.libs.encryptDecryptLib.dataModel.SignedData;
+import me.xethh.libs.encryptDecryptLib.encryption.RsaEncryption;
 import me.xethh.libs.encryptDecryptLib.op.signing.Signer;
 import me.xethh.libs.encryptDecryptLib.op.signing.Verifier;
 

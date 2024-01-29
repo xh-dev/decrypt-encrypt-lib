@@ -1,10 +1,10 @@
 package me.xethh.libs.encryptDecryptLib.op.signing;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.xethh.libs.toolkits.commons.encryption.RsaEncryption;
 import lombok.SneakyThrows;
 import lombok.val;
 import me.xethh.libs.encryptDecryptLib.dataModel.SignedData;
+import me.xethh.libs.encryptDecryptLib.encryption.RsaEncryption;
 
 import java.security.PrivateKey;
 

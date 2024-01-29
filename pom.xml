@@ -87,12 +87,16 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.15.2</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>dev.xethh.libs.toolkits</groupId>-->
+<!--            <artifactId>commons</artifactId>-->
+<!--            <version>1.0.1</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>dev.xethh.libs.toolkits</groupId>
-            <artifactId>commons</artifactId>
-            <version>1.0.1</version>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.63</version>
         </dependency>
-
         <dependency>
             <groupId>me.xethh.utils</groupId>
             <artifactId>DateUtils</artifactId>
