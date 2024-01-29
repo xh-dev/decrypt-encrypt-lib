@@ -1,27 +1,21 @@
 package me.xethh.libs.encryptDecryptLib.encryption;
 
 import lombok.SneakyThrows;
-import lombok.val;
-import sun.security.util.DerInputStream;
-import sun.security.util.DerValue;
+//import sun.security.util.DerInputStream;
+//import sun.security.util.DerValue;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.nio.file.Files;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.RSAPrivateCrtKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.Arrays;
 import java.util.Base64;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -194,36 +188,36 @@ public class RsaEncryption {
         }
     }
 
-    /**
-     * Get private key from PKCS1 format
-     *
-     * @param bytes byte array of private key data
-     * @return Private Key Object
-     */
-    public static PrivateKey getPrivateKeyFromPKCS1(byte[] bytes) {
-        try {
-            DerInputStream derReader = new DerInputStream(bytes);
-            DerValue[] seq = derReader.getSequence(0);
-            // skip version seq[0];
-            BigInteger modulus = seq[1].getBigInteger();
-            BigInteger publicExp = seq[2].getBigInteger();
-            BigInteger privateExp = seq[3].getBigInteger();
-            BigInteger prime1 = seq[4].getBigInteger();
-            BigInteger prime2 = seq[5].getBigInteger();
-            BigInteger exp1 = seq[6].getBigInteger();
-            BigInteger exp2 = seq[7].getBigInteger();
-            BigInteger crtCoef = seq[8].getBigInteger();
-
-            RSAPrivateCrtKeySpec keySpec =
-                    new RSAPrivateCrtKeySpec(modulus, publicExp, privateExp, prime1, prime2, exp1, exp2, crtCoef);
-            KeyFactory keyFactory = null;
-            keyFactory = KeyFactory.getInstance("RSA");
-            return keyFactory.generatePrivate(keySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
+    ///**
+    // * Get private key from PKCS1 format
+    // *
+    // * @param bytes byte array of private key data
+    // * @return Private Key Object
+    // */
+    //public static PrivateKey getPrivateKeyFromPKCS1(byte[] bytes) {
+    //    try {
+    //        DerInputStream derReader = new DerInputStream(bytes);
+    //        DerValue[] seq = derReader.getSequence(0);
+    //        // skip version seq[0];
+    //        BigInteger modulus = seq[1].getBigInteger();
+    //        BigInteger publicExp = seq[2].getBigInteger();
+    //        BigInteger privateExp = seq[3].getBigInteger();
+    //        BigInteger prime1 = seq[4].getBigInteger();
+    //        BigInteger prime2 = seq[5].getBigInteger();
+    //        BigInteger exp1 = seq[6].getBigInteger();
+    //        BigInteger exp2 = seq[7].getBigInteger();
+    //        BigInteger crtCoef = seq[8].getBigInteger();
+    //
+    //        RSAPrivateCrtKeySpec keySpec =
+    //                new RSAPrivateCrtKeySpec(modulus, publicExp, privateExp, prime1, prime2, exp1, exp2, crtCoef);
+    //        KeyFactory keyFactory = null;
+    //        keyFactory = KeyFactory.getInstance("RSA");
+    //        return keyFactory.generatePrivate(keySpec);
+    //    } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException e) {
+    //        e.printStackTrace();
+    //        throw new RuntimeException(e);
+    //    }
+    //}
 
     /**
      * Recover PublicKey saved in byte array format
