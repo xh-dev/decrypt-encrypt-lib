@@ -16,12 +16,27 @@
 
     <name>encryptDecryptLib</name>
 
+    <url>http://www.example.com</url>
+    <description>Library of common used tools</description>
+
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+    <developers>
+        <developer>
+            <name>Xeth Hung</name>
+            <email>admin@xethh.me</email>
+            <organizationUrl>https://www.xethh.me</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://bitbucket.org/xethhme/common-lib.git</connection>
+        <developerConnection>scm:git:ssh://bitbucket.org/xethhme/common-lib.git</developerConnection>
+        <url>https://bitbucket.org/xethhme/common-lib/src</url>
+    </scm>
 
     <distributionManagement>
         <snapshotRepository>
