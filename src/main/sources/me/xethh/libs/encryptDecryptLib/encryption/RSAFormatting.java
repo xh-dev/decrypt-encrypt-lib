@@ -86,6 +86,19 @@ public class RSAFormatting {
 
     }
 
+    private enum PemHeaderPosition {
+        Begin("BEGIN"), End("END");
+        private String code;
+
+        PemHeaderPosition(String code) {
+            this.code = code;
+        }
+    }
+
+    private static String pemHeader(PemHeaderPosition position, String tagName) {
+        return String.format("-----%s %s-----", position.code.toUpperCase(), tagName);
+    }
+
     /**
      * The key stored as PKCS#8
      * @param privateKey private key
@@ -93,23 +106,20 @@ public class RSAFormatting {
      */
     public static String toPem(PrivateKey privateKey){
         PKCS8EncodedKeySpec sp = new PKCS8EncodedKeySpec(privateKey.getEncoded());
-        System.out.println(privateKey.getAlgorithm());
-        System.out.println(privateKey.getFormat());
-        System.out.println(sp.getFormat());
-        return "-----BEGIN PRIVATE KEY-----\n" +
-        Base64.getEncoder().encodeToString(sp.getEncoded()) +
-        "\n-----END PRIVATE KEY-----\n";
+        return pemHeader(PemHeaderPosition.Begin, "PRIVATE KEY") + "\n" +
+                Base64.getEncoder().encodeToString(sp.getEncoded()) +
+                "\n" + pemHeader(PemHeaderPosition.End, "PRIVATE KEY") + "\n";
     }
     public static String toPemPKCS1(Key key){
         if(key instanceof PrivateKey){
-            return "-----BEGIN RSA PRIVATE KEY-----\n" +
+            return pemHeader(PemHeaderPosition.Begin, "RSA PRIVATE KEY")+"\n" +
                     Base64.getEncoder().encodeToString(toPKCS1PrivateKey((PrivateKey) key)) +
-                    "\n-----END RSA PRIVATE KEY-----\n";
+                    String.format("\n%s\n", pemHeader(PemHeaderPosition.End, "RSA PRIVATE KEY"));
         }
         else{
-            return "-----BEGIN RSA PUBLIC KEY-----\n" +
+            return String.format("%s\n", pemHeader(PemHeaderPosition.Begin, "RSA PUBLIC KEY")) +
                     Base64.getEncoder().encodeToString(toPKCS1PublicKey((PublicKey) key)) +
-                    "\n-----END RSA PUBLIC KEY-----\n";
+                    String.format("\n%s\n", pemHeader(PemHeaderPosition.End, "RSA PUBLIC KEY"));
         }
     }
     public static String toPem(PublicKey publicKey){
@@ -120,9 +130,9 @@ public class RSAFormatting {
         System.out.println(sp.getFormat());
         System.out.println(pkcs1.getAlgorithm().getAlgorithm());
 
-        return "-----BEGIN PUBLIC KEY-----\n" +
+        return String.format("%s\n", pemHeader(PemHeaderPosition.Begin, "PUBLIC KEY")) +
                 Base64.getEncoder().encodeToString(publicKey.getEncoded()) +
-                "\n-----END PUBLIC KEY-----\n";
+                String.format("\n%s\n", pemHeader(PemHeaderPosition.End, "PUBLIC KEY"));
     }
 
 
