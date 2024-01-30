@@ -109,7 +109,7 @@ public class RSAFormatting {
     }
 
     private static String splitPem(String data) {
-        val splitSize = 50;
+        val splitSize = 64;
         val row = (data.length() / splitSize) + (data.length() % splitSize == 0 ? 0 : 1);
         val sb = new StringBuilder();
         for (int i = 0; i < row; i++) {
@@ -144,8 +144,8 @@ public class RSAFormatting {
         }
     }
     public static String toPem(PublicKey publicKey){
-        PKCS8EncodedKeySpec sp = new PKCS8EncodedKeySpec(publicKey.getEncoded());
-        SubjectPublicKeyInfo pkcs1 = SubjectPublicKeyInfo.getInstance(publicKey.getEncoded());
+        //PKCS8EncodedKeySpec sp = new PKCS8EncodedKeySpec(publicKey.getEncoded());
+        //SubjectPublicKeyInfo pkcs1 = SubjectPublicKeyInfo.getInstance(publicKey.getEncoded());
         //System.out.println(publicKey.getAlgorithm());
         //System.out.println(publicKey.getFormat());
         //System.out.println(sp.getFormat());
