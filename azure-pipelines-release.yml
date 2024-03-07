@@ -13,6 +13,9 @@ pool: xhn-build-pool
 
 steps:
   - script: |
+      mvn dependency:tree
+    displayName: 'show dependencies'
+  - script: |
       mvn clean test compile package
     displayName: 'build'
   - script: |
