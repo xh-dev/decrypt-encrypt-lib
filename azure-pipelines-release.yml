@@ -16,6 +16,9 @@ steps:
       mvn dependency:tree
     displayName: 'show dependencies'
   - script: |
+      mvn clean install -U
+    displayName: 'force reload'
+  - script: |
       mvn clean test compile package
     displayName: 'build'
   - script: |
