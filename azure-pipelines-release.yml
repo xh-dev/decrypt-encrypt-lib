@@ -13,11 +13,11 @@ pool: xhn-build-pool
 
 steps:
   - script: |
+      rm -fr ~/.m2/repository/me
+    displayName: 'force reload'
+  - script: |
       mvn dependency:tree
     displayName: 'show dependencies'
-  - script: |
-      mvn clean install -U
-    displayName: 'force reload'
   - script: |
       mvn clean test compile package
     displayName: 'build'
