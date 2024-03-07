@@ -1,19 +1,23 @@
 package me.xethh.libs.encryptDecryptLib.encryption;
 
 import lombok.SneakyThrows;
-//import sun.security.util.DerInputStream;
-//import sun.security.util.DerValue;
+import lombok.val;
+import org.bouncycastle.asn1.ASN1Sequence;
+import org.bouncycastle.asn1.DERNull;
+import org.bouncycastle.asn1.DERSequence;
+import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
+import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
+import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import java.io.IOException;
-import java.math.BigInteger;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.RSAPrivateCrtKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
@@ -164,9 +168,32 @@ public class RsaEncryption {
     }
 
     @SneakyThrows
+    public static PrivateKey getPrivateKeyFromPemPKCS1(String data) {
+        return getPrivateKeyFromPKCS1(RSAFormatting.loadPemBytes(data));
+    }
+
+    @SneakyThrows
     public static PublicKey getPubKeyFromPem(String name) {
         return getPublicKey(RSAFormatting.loadPemBytes(name));
     }
+
+    @SneakyThrows
+    public static PrivateKey getPrivateKeyFromPemString(String data) {
+        return getPrivateKey(RSAFormatting.loadPemBytes(data.getBytes()));
+    }
+
+    @SneakyThrows
+    public static PublicKey getPubKeyFromPemString(String data) {
+        return getPublicKey(RSAFormatting.loadPemBytes(data.getBytes()));
+    }
+
+    @SneakyThrows
+    public static PublicKey getPubKeyFromPemPKCS1(String data) {
+        return getPublicKeyFromPKCS1(RSAFormatting.loadPemBytes(data));
+    }
+
+
+
 
     /**
      * Recover PrivateKey saved in byte array format
@@ -186,6 +213,17 @@ public class RsaEncryption {
             e.printStackTrace();
             throw new RuntimeException("InvalidKeySpecException", e);
         }
+    }
+
+    @SneakyThrows
+    public static PrivateKey getPrivateKeyFromPKCS1(byte[] encodedKey) {
+        //val algo = new AlgorithmIdentifier(PKCSObjectIdentifiers.rsaEncryption, DERNull.INSTANCE);
+        //val info = new PrivateKeyInfo(algo, ASN1Sequence.getInstance(encodedKey));
+        //KeyFactory factory = KeyFactory.getInstance(RSA);
+        //PKCS8EncodedKeySpec encodedKeySpec = new PKCS8EncodedKeySpec(info.getEncoded());
+        KeyFactory factory = KeyFactory.getInstance(RSA, new BouncyCastleProvider());
+        PKCS8EncodedKeySpec encodedKeySpec = new PKCS8EncodedKeySpec(encodedKey);
+        return factory.generatePrivate(encodedKeySpec);
     }
 
     ///**
@@ -229,6 +267,23 @@ public class RsaEncryption {
         try {
             KeyFactory factory = KeyFactory.getInstance(RSA);
             X509EncodedKeySpec encodedKeySpec = new X509EncodedKeySpec(encodedKey);
+            return factory.generatePublic(encodedKeySpec);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            throw new RuntimeException("NoSuchAlgorithmException", e);
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+            throw new RuntimeException("InvalidKeySpecException", e);
+        }
+    }
+
+    @SneakyThrows
+    public static PublicKey getPublicKeyFromPKCS1(byte[] encodedKey) {
+        try {
+            val algo = new AlgorithmIdentifier(PKCSObjectIdentifiers.rsaEncryption, DERNull.INSTANCE);
+            val info = new SubjectPublicKeyInfo(algo, ASN1Sequence.getInstance(encodedKey));
+            KeyFactory factory = KeyFactory.getInstance(RSA);
+            X509EncodedKeySpec encodedKeySpec = new X509EncodedKeySpec(info.getEncoded());
             return factory.generatePublic(encodedKeySpec);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

@@ -4,7 +4,11 @@ import lombok.SneakyThrows;
 import lombok.val;
 import org.bouncycastle.asn1.ASN1Encodable;
 import org.bouncycastle.asn1.ASN1Primitive;
+import org.bouncycastle.asn1.ASN1Sequence;
+import org.bouncycastle.asn1.DERNull;
+import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 
 import java.io.File;
@@ -158,16 +162,20 @@ public class RSAFormatting {
 
     @SneakyThrows
     protected static byte[] loadPemBytes(String name) {
-        val pattern = Pattern.compile("-----(BEGIN|END) ([ \\w]+)-----");
         val bytes = Files.readAllBytes(new File(name).toPath());
-        return Base64.getDecoder().decode(
-                Arrays.stream(new String(bytes, UTF_8).split("\n"))
-                        .filter(it -> !pattern.matcher(it).matches())
-                        .collect(Collectors.joining(""))
-                        .getBytes(UTF_8)
-        );
+        return loadPemBytes(bytes);
     }
 
+    @SneakyThrows
+    protected static byte[] loadPemBytes(byte[] bytes) {
+        val pattern = Pattern.compile("-----(BEGIN|END) ([ \\w]+)-----");
+        val data = Arrays.stream(new String(bytes, UTF_8).split("\n"))
+                .filter(it -> !pattern.matcher(it).matches())
+                .collect(Collectors.joining(""));
+        return Base64.getDecoder().decode(
+                data.getBytes(UTF_8)
+        );
+    }
 
     public static void main(String[] args){
         KeyPair pair = RsaEncryption.keyPair();
