@@ -11,8 +11,8 @@ import me.xethh.libs.encryptDecryptLib.encryption.RsaEncryption;
 import me.xethh.libs.encryptDecryptLib.exceptions.NotDataContainerException;
 import me.xethh.libs.encryptDecryptLib.exceptions.SerializationException;
 import me.xethh.libs.encryptDecryptLib.exceptions.SignatureNotValidException;
-import me.xethh.libs.encryptDecryptLib.op.deen.DeEnCryptor;
 import me.xethh.utils.functionalPacks.Scope;
+import me.xethh.utils.functionalPacks.safeFunctionalInterface.SafeConsumer;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
@@ -80,7 +80,7 @@ public class DeEnCryptorImpl implements DeEnCryptor {
         String sign = RsaEncryption.sign(data, getPrivateKey());
 
         DataContainer con = Scope.of(new DataContainer())
-                .apply(it -> {
+                .apply((SafeConsumer<DataContainer>) it -> {
                     it.setData(encrypted);
                     it.setSign(sign);
                     it.setIv(
