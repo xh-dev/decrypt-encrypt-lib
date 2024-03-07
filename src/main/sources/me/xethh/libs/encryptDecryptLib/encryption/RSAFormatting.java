@@ -161,13 +161,13 @@ public class RSAFormatting {
     }
 
     @SneakyThrows
-    protected static byte[] loadPemBytes(String name) {
+    public static byte[] loadPemBytes(String name) {
         val bytes = Files.readAllBytes(new File(name).toPath());
         return loadPemBytes(bytes);
     }
 
     @SneakyThrows
-    protected static byte[] loadPemBytes(byte[] bytes) {
+    public static byte[] loadPemBytes(byte[] bytes) {
         val pattern = Pattern.compile("-----(BEGIN|END) ([ \\w]+)-----");
         val data = Arrays.stream(new String(bytes, UTF_8).split("\n"))
                 .filter(it -> !pattern.matcher(it).matches())
