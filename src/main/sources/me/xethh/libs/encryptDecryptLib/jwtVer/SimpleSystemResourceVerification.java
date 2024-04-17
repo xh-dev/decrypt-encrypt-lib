@@ -17,12 +17,17 @@ public class SimpleSystemResourceVerification implements Verification{
 
     @Override
     public boolean verify(DecodedJWT token) {
-        JWT.require(algorithm)
-                .withIssuer(issuer)
-                .withClaim("type", TokenType.access.name())
-                .withClaim("roles", ((claim, decodedJWT) -> claim.asString().contains(systemResource.name())))
-                .build()
-                .verify(token);
-        return true;
+        try{
+            JWT.require(algorithm)
+                    .withIssuer(issuer)
+                    .withClaim("type", TokenType.access.name())
+                    .withClaim("roles", ((claim, decodedJWT) -> claim.asString().contains(systemResource.name())))
+                    .build()
+                    .verify(token);
+            return true;
+        } catch (Throwable throwable) {
+            return false;
+        }
     }
+
 }
