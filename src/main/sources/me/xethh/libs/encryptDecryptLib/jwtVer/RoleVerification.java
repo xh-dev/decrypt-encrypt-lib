@@ -49,7 +49,7 @@ public interface RoleVerification {
                 try{
                     JWT.require(algorithm)
                             .withIssuer(issuer)
-                            .withClaim("type", TokenType.admin.name())
+                            .withClaim("type", tokenType.name())
                             .build()
                             .verify(token);
                     return true;

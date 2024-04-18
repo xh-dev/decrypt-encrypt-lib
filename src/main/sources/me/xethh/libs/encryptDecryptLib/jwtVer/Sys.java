@@ -2,8 +2,9 @@ package me.xethh.libs.encryptDecryptLib.jwtVer;
 
 public class Sys {
     private final String sysId;
-
-
+    public String name(){
+        return sysId;
+    }
 
     private Sys(String sysId) {
         this.sysId = sysId;
